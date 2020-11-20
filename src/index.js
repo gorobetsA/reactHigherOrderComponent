@@ -1,17 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const starWarsChars = [
+    { name: 'Darth Vader', side: 'dark' },
+    { name: 'Luke Skywalker', side: 'light' },
+    { name: 'Palpatine', side: 'dark' },
+    { name: 'Obi-Wan Kenobi ', side: 'light' }
+]
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const App = ({list, side}) => {
+    const filteredList = list.filter(char => char.side === side)
+    return (
+        <ul>
+            { filteredList.map((char, index) => {
+                return (
+                    <li key={char.name + index}>
+                        <strong>{char.name}</strong> - &nbsp;
+                        {char.side}
+                    </li>
+                )
+            }) }
+        </ul>
+    )
+}
+
+
+
+ReactDOM.render(<App list={starWarsChars} side ="light"/>, document.getElementById('root'));
